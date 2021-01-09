@@ -6,12 +6,13 @@
  * 版权所有，侵权必究！
  */
 
-package io.renren.common.utils;
+package com.atguigu.common.utils;
 
+import com.atguigu.common.xss.SQLFilter;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.renren.common.xss.SQLFilter;
+
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
