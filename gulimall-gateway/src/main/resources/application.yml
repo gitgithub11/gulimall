@@ -1,0 +1,62 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: baidu_route
+#        uri: https://www.baidu.com
+#        predicates:
+#        - Query=url, baidu
+#      - id: qq_route
+#        uri: https://www.qq.com/
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: baidu_route
+          uri: https://www.baidu.com
+          predicates:
+            - Query=url, baidu
+        - id: qq_route
+          uri: https://www.qq.com/  # url方式：http://localhost:88/?url=qq
+          predicates:
+          - Query=url, qq
+#       指定路径断言
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+          - Path=/api/product/**
+          filters:
+          - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+
+        - id: sys_route
+          uri: lb://renren-fast
+          predicates:
+          - Path=/api/sys/**
+          filters:
+          - RewritePath=/api/(?<segment>/?.*),/renren-fast/$\{segment}
+
+        - id: admin_route
+          uri: lb://renren-fast # lb:负载均衡
+          predicates: # 断言：过滤条件
+          - Path=/api/**
+          filters:
+          - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment} # 重写路径
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
